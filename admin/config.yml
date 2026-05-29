@@ -1,6 +1,7 @@
 backend:
-  name: git-gateway
-  branch: main # Agar aapki repository ki default branch 'master' hai, to master likhein
+  name: github
+  repo: DxdHaiwan/sandeep-portfolio
+  branch: main
 
 media_folder: "assets/images"
 public_folder: "/assets/images"
