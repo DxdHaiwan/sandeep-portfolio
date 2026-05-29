@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandeep Kumar - Premium Bento Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* CSS RESET & MODERN STYLING BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #05010d;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 24px;
+            max-width: 1500px;
+            margin: 0 auto;
+            overflow-x: hidden;
+        }
+
+        /* PREMIUM NEON BENTO LAYOUTS */
+        .neon-glow-text {
+            color: #ff007f;
+            text-shadow: 0 0 12px rgba(255, 0, 127, 0.7), 0 0 25px rgba(255, 0, 127, 0.4);
+        }
+        .bento-card-wrapper {
+            background: linear-gradient(145deg, rgba(22, 8, 38, 0.65) 0%, rgba(10, 3, 22, 0.85) 100%);
+            border: 1px solid rgba(123, 44, 191, 0.28);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .bento-card-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top left, rgba(255, 0, 127, 0.05), transparent 60%);
+            pointer-events: none;
+        }
+        .bento-card-wrapper:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 0, 127, 0.45);
+            box-shadow: 0 20px 40px rgba(255, 0, 127, 0.18);
+        }
+
+        /* PREMIUM FLOATING HEADER NAVIGATION */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(13, 4, 26, 0.85);
+            backdrop-filter: blur(14px);
+            padding: 16px 36px;
+            border-radius: 24px;
+            border: 1px solid rgba(123, 44, 191, 0.25);
+            margin-bottom: 32px;
+            position: sticky;
+            top: 15px;
+            z-index: 1000;
+        }
+        .brand-lockup {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .brand-badge {
+            background: #ff007f;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 16px;
+            box-shadow: 0 0 18px #ff007f;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        nav a {
+            color: #b5b0be;
+            text-decoration: none;
+            padding: 8px 18px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 30px;
+        }
+        nav a:hover, nav a.active {
+            color: #ffffff;
+            background: rgba(255, 0, 127, 0.15);
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
+        }
+
+        /* BENTO DYNAMIC GRID TRACKS */
+        .grid-row-hero {
+            display: grid;
+            grid-template-columns: 1.85fr 1.15fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        .grid-row-stats {
+            display: grid;
+            grid-template-columns: 1.15fr 1.85fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        .grid-row-showcase {
+            display: grid;
+            grid-template-columns: 1.55fr 1.45fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        .grid-row-skills {
+            display: grid;
+            grid-template-columns: 1.45fr 1.55fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        /* HERO LAYOUT CONTEXTS */
+        .hero-left-intro {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+        .hero-left-intro h1 {
+            font-size: 58px;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            line-height: 1.05;
+        }
+        .avatar-glow-holder {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            background: radial-gradient(circle at center, rgba(123, 44, 191, 0.25) 0%, transparent 75%), rgba(13, 4, 26, 0.6);
+        }
+        .avatar-neon-ring {
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff007f, #7b2cbf, #00b4d8);
+            padding: 5px;
+            box-shadow: 0 0 35px rgba(123, 44, 191, 0.45);
+            position: relative;
+        }
+        .avatar-neon-ring img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background: #0d041a;
+        }
+        .status-badge-pill {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: rgba(37, 211, 102, 0.08);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            color: #4ade80;
+            font-weight: 600;
+            border: 1px solid rgba(74, 222, 128, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #4ade80;
+        }
+
+        /* PREMIUM DYNAMIC BUTTONS */
+        .gradient-glow-btn {
+            background: linear-gradient(135deg, #ff007f, #7b2cbf);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 5px 18px rgba(255, 0, 127, 0.35);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s ease;
+        }
+        .gradient-glow-btn:hover {
+            box-shadow: 0 8px 25px rgba(255, 0, 127, 0.55);
+            transform: translateY(-2px);
+        }
+        .bordered-outline-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .bordered-outline-btn:hover {
+            border-color: #ff007f;
+            background: rgba(255, 0, 127, 0.06);
+        }
+
+        /* INLINE SYSTEM QUICK HANDLES */
+        .quick-socials-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .circle-social-ring {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+        .circle-social-ring:hover {
+            background: #ff007f;
+            border-color: #ff007f;
+            box-shadow: 0 0 12px #ff007f;
+            transform: scale(1.1);
+        }
+
+        /* ABOUT MOCKUP PLATFORM DESIGN */
+        .about-interior-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            height: 100%;
+            justify-content: space-between;
+        }
+        .studio-neon-mockup {
+            background: #0a0314;
+            border: 1px solid rgba(123, 44, 191, 0.35);
+            border-radius: 18px;
+            height: 150px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #ff007f;
+            font-size: 28px;
+            text-shadow: 0 0 15px #ff007f;
+            box-shadow: inset 0 0 25px rgba(0,0,0,0.85);
+        }
+
+        /* METRIC COUPLING COUNTERS GRID */
+        .metrics-counters-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            height: 100%;
+            align-items: center;
+            text-align: center;
+        }
+        .counter-item-block {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .counter-item-block:not(:first-child) {
+            border-left: 1px solid rgba(123, 44, 191, 0.2);
+        }
+        .counter-item-block h2 {
+            font-size: 46px;
+            font-weight: 800;
+        }
+        .counter-item-block p {
+            font-size: 11px;
+            color: #a09bab;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        /* PORFOLIO THUMBNAILS MASONRY */
+        .section-split-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .navigation-filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+        .category-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(123, 44, 191, 0.25);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 12px;
+            cursor: pointer;
+            color: #c4c0cc;
+            transition: 0.3s;
+        }
+        .category-pill.active, .category-pill:hover {
+            background: #ff007f;
+            color: white;
+            border-color: #ff007f;
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+        }
+        .portfolio-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .grid-thumbnail-frame {
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/11;
+            background: #0e0419;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+        }
+        .grid-thumbnail-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.88;
+            transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .grid-thumbnail-frame:hover img {
+            transform: scale(1.06);
+            opacity: 1;
+        }
+
+        /* SERVICES HORIZONTAL TILES */
+        .services-list-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .service-bento-tile {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(123, 44, 191, 0.18);
+            padding: 14px 22px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+        .service-bento-tile:hover {
+            border-color: #ff007f;
+            background: rgba(255, 0, 127, 0.02);
+            transform: translateX(5px);
+        }
+        .srv-tile-core {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .srv-icon-badge {
+            color: #ff007f;
+            background: rgba(255, 0, 127, 0.12);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+        }
+
+        /* TECHNICAL GLOWING PROGRESS LINES */
+        .competency-bars-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .progress-bar-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .progress-bar-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+        .progress-bar-track {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            height: 7px;
+            border-radius: 20px;
+        }
+        .progress-bar-glow-fill {
+            height: 100%;
+            background: linear-gradient(to right, #ff007f, #7b2cbf);
+            border-radius: 20px;
+            box-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+        }
+        .branding-badges-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(123, 44, 191, 0.18);
+        }
+        .software-tag-pill {
+            padding: 6px 15px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        .pill-ps { background: #001c38; color: #00b4d8; border: 1px solid rgba(0,180,216,0.2); }
+        .pill-ai { background: #331700; color: #ffb703; border: 1px solid rgba(255,183,3,0.2); }
+        .pill-canva { background: #2b0052; color: #a2d2ff; border: 1px solid rgba(162,210,255,0.2); }
+
+        /* CONTACT SYSTEM LINKS */
+        .conversion-links-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .direct-action-anchor {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 24px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .anchor-whatsapp { background: #25d366; color: #05010d; }
+        .anchor-whatsapp:hover { box-shadow: 0 0 18px rgba(37, 211, 102, 0.45); transform: translateY(-2px); }
+        .anchor-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+        .anchor-instagram:hover { box-shadow: 0 0 18px rgba(220, 39, 67, 0.45); transform: translateY(-2px); }
+        .anchor-email { background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid rgba(255,255,255,0.12); }
+        .anchor-email:hover { border-color: #ff007f; background: rgba(255, 0, 127, 0.06); transform: translateX(4px); }
+
+        /* ADVANCED BREAKPOINTS RESPONSIVENESS */
+        @media (max-width: 1150px) {
+            .grid-row-hero, .grid-row-stats, .grid-row-showcase, .grid-row-skills { grid-template-columns: 1fr; }
+            .metrics-counters-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 24px 0; }
+            .counter-item-block:not(:first-child) { border-left: none; }
+            .counter-item-block:nth-child(2n) { border-left: 1px solid rgba(123, 44, 191, 0.2); }
+            .portfolio-cards-grid { grid-template-columns: repeat(2, 1fr); }
+            header { flex-direction: column; gap: 15px; text-align: center; }
+            nav { display: flex; flex-wrap: wrap; justify-content: center; }
+            .hero-left-intro h1 { font-size: 44px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header data-aos="fade-down" data-aos-duration="1000">
+        <div class="brand-lockup">
+            <div class="brand-badge">SK</div>
+            <div>
+                <h3 style="font-size: 14px; font-weight: 700; letter-spacing: 0.5px;">Sandeep Kumar</h3>
+                <p style="font-size: 11px; color: #a099aa;">Graphic Designer</p>
+            </div>
+        </div>
+        <nav>
+            <a href="#home" class="active"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#about"><i class="fa-regular fa-user"></i> About</a>
+            <a href="#portfolio"><i class="fa-regular fa-folder-open"></i> Portfolio</a>
+            <a href="#services"><i class="fa-solid fa-briefcase"></i> Services</a>
+            <a href="#skills"><i class="fa-solid fa-cubes"></i> Skills</a>
+            <a href="#contact"><i class="fa-regular fa-comments"></i> Contact</a>
+        </nav>
+        <a href="#contact" class="gradient-glow-btn">
+            <span>Let's Work Together</span> <i class="fa-solid fa-paper-plane"></i>
+        </a>
+    </header>
+
+    <div id="home" class="grid-row-hero">
+        <div class="bento-card-wrapper hero-left-intro" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="100">
+            <p style="color: #ff007f; font-size: 12px; font-weight: bold; letter-spacing: 2px;"><i class="fa-solid fa-wand-magic-sparkles"></i> HELLO, I'M</p>
+            <h1>SANDEEP KUMAR<br><span class="neon-glow-text">GRAPHIC DESIGNER</span></h1>
+            <p style="color: white; font-size: 18px; font-weight: 500;">Turning Ideas Into <span style="color:#ff007f; text-decoration: underline wavy;">Eye-Catching</span> Designs</p>
+            <p style="color: #a099aa; font-size: 14px; max-width: 640px; line-height: 1.6;">
+                I create modern, creative and impactful designs that help brands stand out and grow. From premium thumbnails to high-quality social media posts.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px;">
+                <a href="#portfolio" class="gradient-glow-btn">View My Work <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#" class="bordered-outline-btn">Download CV <i class="fa-solid fa-download"></i></a>
+            </div>
+            <div class="quick-socials-row">
+                <span style="font-size: 12px; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Follow Me</span>
+                <a href="#" class="circle-social-ring"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="circle-social-ring"><i class="fa-brands fa-behance"></i></a>
+                <a href="#" class="circle-social-ring"><i class="fa-regular fa-envelope"></i></a>
+            </div>
+        </div>
+
+        <div class="bento-card-wrapper avatar-glow-holder" data-aos="fade-left" data-aos-duration="1100" data-aos-delay="200">
+            <div class="status-badge-pill"><span class="pulse-dot"></span>Available for Freelance Work</div>
+            <div class="avatar-neon-ring">
+                <img src="https://via.placeholder.com/250" alt="Sandeep Kumar Portrait Profile">
+            </div>
+            <div>
+                <h2 style="font-size: 26px; font-weight: 800; letter-spacing: 0.5px;">Sandeep Kumar</h2>
+                <p style="color: #ff007f; font-size: 13px; font-weight: 600; letter-spacing: 0.8px;">Creative Graphic Designer</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="about" class="grid-row-stats">
+        <div class="bento-card-wrapper" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+            <div class="about-interior-stack">
+                <div>
+                    <div style="font-size: 14px; font-weight: 700; color: #ff007f;"><i class="fa-regular fa-user"></i> ABOUT ME</div>
+                    <p style="font-size: 13px; color: #bbb; line-height: 1.6; margin-top: 12px;">
+                        I'm Sandeep Kumar, a passionate Graphic Designer who loves turning ideas into stunning visual experiences. I specialize in <span style="color:#ff007f">social media designs, thumbnails, posters, branding, meme designs</span> and <span style="color:#ff007f">Canva</span> creativity.
+                    </p>
+                </div>
+                <div class="studio-neon-mockup">SK STUDIO</div>
+            </div>
+        </div>
+
+        <div class="bento-card-wrapper" style="padding: 0;" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+            <div class="metrics-counters-grid">
+                <div class="counter-item-block" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="300">
+                    <i class="fa-solid fa-crown" style="color: #ff007f; font-size: 22px;"></i>
+                    <h2 class="neon-glow-text">50+</h2>
+                    <p>Projects Done</p>
+                </div>
+                <div class="counter-item-block" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="400">
+                    <i class="fa-regular fa-thumbs-up" style="color: #ff007f; font-size: 22px;"></i>
+                    <h2 class="neon-glow-text">30+</h2>
+                    <p>Happy Clients</p>
+                </div>
+                <div class="counter-item-block" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="500">
+                    <i class="fa-solid fa-rocket" style="color: #ff007f; font-size: 22px;"></i>
+                    <h2 class="neon-glow-text">2+</h2>
+                    <p>Years Exp.</p>
+                </div>
+                <div class="counter-item-block" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="600">
+                    <i class="fa-regular fa-star" style="color: #ff007f; font-size: 22px;"></i>
+                    <h2 class="neon-glow-text">100%</h2>
+                    <p>Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="portfolio" class="grid-row-showcase">
+        <div class="bento-card-wrapper" data-aos="fade-right" data-aos-duration="1100">
+            <div class="section-split-header">
+                <div><i class="fa-regular fa-folder-open" style="color: #ff007f;"></i> MY PORTFOLIO</div>
+                <a href="#" style="color:#777; font-size:12px; text-decoration:none; font-weight:600;">View All Works</a>
+            </div>
+            <div class="navigation-filter-chips">
+                <span class="category-pill active">All</span>
+                <span class="category-pill">Social Media</span>
+                <span class="category-pill">Thumbnails</span>
+                <span class="category-pill">Posters</span>
+                <span class="category-pill">Memes</span>
+                <span class="category-pill">Branding</span>
+            </div>
+            <div class="portfolio-cards-grid">
+                <div class="grid-thumbnail-frame" data-aos="zoom-content" data-aos-duration="500"><img src="https://via.placeholder.com/300x200" alt="Work 1"></div>
+                <div class="grid-thumbnail-frame" data-aos="zoom-content" data-aos-duration="500"><img src="https://via.placeholder.com/300x200" alt="Work 2"></div>
+                <div class="grid-thumbnail-frame" data-aos="zoom-content" data-aos-duration="500"><img src="https://via.placeholder.com/300x200" alt="Work 3"></div>
+                <div class="grid-thumbnail-frame" data-aos="zoom-content" data-aos-duration="500"><img src="https://via.placeholder.com/300x200" alt="Work 4"></div>
+                <div class="grid-thumbnail-frame" data-aos="zoom-content" data-aos-duration="500"><img src="https://via.placeholder.com/300x200" alt="Work 5"></div>
+                <div class="grid-thumbnail-frame" data-aos="zoom-content" data-aos-duration="500"><img src="https://via.placeholder.com/300x200" alt="Work 6"></div>
+                <div class="grid-thumbnail-frame" data-aos="zoom-content" data-aos-duration="500"><img src="https://via.placeholder.com/300x200" alt="Work 7"></div>
+                <div class="grid-thumbnail-frame" data-aos="zoom-content" data-aos-duration="500"><img src="https://via.placeholder.com/300x200" alt="Work 8"></div>
+            </div>
+        </div>
+
+        <div id="services" class="bento-card-wrapper" data-aos="fade-left" data-aos-duration="1100">
+            <div class="section-split-header">
+                <div><i class="fa-solid fa-briefcase" style="color: #ff007f;"></i> MY SERVICES</div>
+            </div>
+            <div class="services-list-wrapper">
+                <div class="service-bento-tile" data-aos="fade-left" data-aos-duration="600" data-aos-delay="100">
+                    <div class="srv-tile-core">
+                        <div class="srv-icon-badge"><i class="fa-solid fa-layer-group"></i></div>
+                        <div><h4 style="font-size:13px; font-weight:600;">Social Media Design</h4><p style="font-size:11px; color:#aaa;">Posts, Carousels, Creatives</p></div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="font-size:11px; color:#444;"></i>
+                </div>
+                <div class="service-bento-tile" data-aos="fade-left" data-aos-duration="600" data-aos-delay="200">
+                    <div class="srv-tile-core">
+                        <div class="srv-icon-badge"><i class="fa-brands fa-youtube"></i></div>
+                        <div><h4 style="font-size:13px; font-weight:600;">YouTube Thumbnail</h4><p style="font-size:11px; color:#aaa;">High CTR Click-Worthy Frameworks</p></div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="font-size:11px; color:#444;"></i>
+                </div>
+                <div class="service-bento-tile" data-aos="fade-left" data-aos-duration="600" data-aos-delay="300">
+                    <div class="srv-tile-core">
+                        <div class="srv-icon-badge"><i class="fa-solid fa-photo-film"></i></div>
+                        <div><h4 style="font-size:13px; font-weight:600;">Poster Design</h4><p style="font-size:11px; color:#aaa;">Event, Promotional branding solutions</p></div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="font-size:11px; color:#444;"></i>
+                </div>
+                <div class="service-bento-tile" data-aos="fade-left" data-aos-duration="600" data-aos-delay="400">
+                    <div class="srv-tile-core">
+                        <div class="srv-icon-badge"><i class="fa-solid fa-bullhorn"></i></div>
+                        <div><h4 style="font-size:13px; font-weight:600;">Meme Marketing</h4><p style="font-size:11px; color:#aaa;">Funny, Viral Trendy Designs</p></div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="font-size:11px; color:#444;"></i>
+                </div>
+                <div class="service-bento-tile" data-aos="fade-left" data-aos-duration="600" data-aos-delay="500">
+                    <div class="srv-tile-core">
+                        <div class="srv-icon-badge"><i class="fa-solid fa-palette"></i></div>
+                        <div><h4 style="font-size:13px; font-weight:600;">Canva Templates</h4><p style="font-size:11px; color:#aaa;">Editable Custom Client Ready Assets</p></div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="font-size:11px; color:#444;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-row-skills">
+        <div id="skills" class="bento-card-wrapper" data-aos="fade-up-right" data-aos-duration="1000">
+            <div class="section-split-header"><div><i class="fa-solid fa-cubes" style="color: #ff007f;"></i> MY SKILLS</div></div>
+            <div class="competency-bars-stack">
+                <div class="progress-bar-row">
+                    <div class="progress-bar-meta"><span>Canva Creativity</span><span>95%</span></div>
+                    <div class="progress-bar-track"><div class="progress-bar-glow-fill" style="width: 95%;"></div></div>
+                </div>
+                <div class="progress-bar-row">
+                    <div class="progress-bar-meta"><span>Adobe Photoshop</span><span>90%</span></div>
+                    <div class="progress-bar-track"><div class="progress-bar-glow-fill" style="width: 90%;"></div></div>
+                </div>
+                <div class="progress-bar-row">
+                    <div class="progress-bar-meta"><span>AI Vector Crafting</span><span>85%</span></div>
+                    <div class="progress-bar-track"><div class="progress-bar-glow-fill" style="width: 85%;"></div></div>
+                </div>
+                <div class="progress-bar-row">
+                    <div class="progress-bar-meta"><span>Social Media Branding</span><span>90%</span></div>
+                    <div class="progress-bar-track"><div class="progress-bar-glow-fill" style="width: 90%;"></div></div>
+                </div>
+            </div>
+            <div class="branding-badges-row">
+                <span class="software-tag-pill pill-ps">Ps</span>
+                <span class="software-tag-pill pill-ai">Ai</span>
+                <span class="software-tag-pill pill-canva">Canva</span>
+            </div>
+        </div>
+
+        <div id="contact" class="bento-card-wrapper" data-aos="fade-up-left" data-aos-duration="1000">
+            <div class="section-split-header"><div><i class="fa-regular fa-comments" style="color: #ff007f;"></i> LET'S CONNECT</div></div>
+            <p style="font-size: 13px; color: #a099aa; margin-bottom: 16px; line-height: 1.5;">I'm always open to exciting premium design ventures, contracts, and creative collaborations.</p>
+            <div class="conversion-links-stack">
+                <a href="https://wa.me/YOUR_NUMBER" target="_blank" class="direct-action-anchor anchor-whatsapp">
+                    <span><i class="fa-brands fa-whatsapp"></i> WhatsApp</span> <span>Chat Now</span>
+                </a>
+                <a href="#" target="_blank" class="direct-action-anchor anchor-instagram">
+                    <span><i class="fa-brands fa-instagram"></i> Instagram</span> <span>Follow Me</span>
+                </a>
+                <a href="mailto:your-email@gmail.com" class="direct-action-anchor anchor-email">
+                    <span><i class="fa-regular fa-envelope"></i> Email Address</span> <span>Send Message</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer style="font-size: 11px; color: #443c54; text-align: center; padding: 24px 0 10px; border-top: 1px solid rgba(123, 44, 191, 0.15);">
+        © 2026 Sandeep Kumar. All Rights Reserved. ❤️
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Core initializer engines
+        AOS.init({
+            duration: 1000,   // Har component 1 second ke smooth span par animate hoga
+            once: false,      // Niche se upar scroll karne par animation baar-baar execute hoga
+            mirror: true,     // Reverse movement scrolling control active
+            offset: 80        // Element screen par aate hi animation trigger handle ho jayega
+        });
+    </script>
+</body>
+</html>
